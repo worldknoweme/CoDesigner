@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>用户登录 - 崇信毕设 - 信誉成就未来</title>
+<meta name="Keywords" content="" />
+<meta name="description" content="" />
+    <link th:href="@{custom/css/user-info.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{Validform/css/demo.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{Validform/css/form.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{custom/js/jquery-1.7.2.min.js}" charset="utf-8"></script>
+    <script th:src="@{Validform/js/Validform_v5.3.2_min.js}" charset="utf-8"></script>
+    <script th:src="@{Validform/plugin/passwordStrength/passwordStrength-min.js}" charset="utf-8"></script>
+
+    <script th:src="@{custom/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{custom/layer/layer.min.js}"></script>
+    <script type="text/javascript" th:src="@{custom/js/jquery.SuperSlide.2.1.1.js}"></script>
+<script type="text/javascript">
+$(function(){
+	//$(".registerform").Validform();  //就这一行代码！;
+
+	var getInfoObj=function(){
+			return 	$(this).parents("td").next().find(".info");
+		}
+
+	$("[datatype]").focusin(function(){
+		if(this.timeout){clearTimeout(this.timeout);}
+		var infoObj=getInfoObj.call(this);
+		if(infoObj.siblings(".Validform_right").length!=0){
+			return;
+		}
+		infoObj.show().siblings().hide();
+
+	}).focusout(function(){
+		var infoObj=getInfoObj.call(this);
+		this.timeout=setTimeout(function(){
+			infoObj.hide().siblings(".Validform_wrong,.Validform_loading").show();
+		},0);
+
+	});
+
+	$(".registerform").Validform({
+		tiptype:2,
+		usePlugin:{
+			passwordstrength:{
+				minLen:6,
+				maxLen:18,
+				trigger:function(obj,error){
+					if(error){
+						obj.parent().next().find(".passwordStrength").hide().siblings(".info").show();
+					}else{
+						obj.removeClass("Validform_error").parent().next().find(".passwordStrength").show().siblings().hide();
+					}
+				}
+			}
+		}
+	});
+})
+</script>
+</head>
+</body>
+<div class="head_s">
+	<div class="head_s_wrap">
+	<a href="#" class="logo"></a>
+	</div>
+</div>
+<div class="loginPanel_con">
+<div class="loginPanel_left">
+<h3>还没有XX账号？无需注册<br>立刻用QQ号登陆</h3>
+<span onclick="toQzoneLogin();" class="login_qq">QQ账户登录</span>
+</div>
+<div class="loginPanel_right">
+<h3>马上登录<br>融入我们的集体！</h3>
+<form class="registerform" method="post" action="login">
+            <table width="100%" style="table-layout:fixed;">
+                <tr>
+                    <td class="need" style="width:10px;">*</td>
+                    <td style="width:80px;">邮箱/用户名：</td>
+                    <td style="width:280px;"><input type="text" value="" name="name" class="inputxt" datatype="s2-18|e" nullmsg="请输入您的用户名/邮箱！" errormsg="请正确输入您的用户名/邮箱！" /></td>
+                    <td>
+                    	<div class="Validform_checktip"></div>
+                        <div class="info" th:text="${error}">请输入您的用户名/邮箱！<span class="dec"><s class="dec1">&#9670;</s><s class="dec2">&#9670;</s></span></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need" style="width:10px;">*</td>
+                    <td style="width:80px;">密码：</td>
+                    <td style="width:210px;">
+                        <input type="password" value="" name="password" class="inputxt" >
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="need"></td>
+                    <td></td>
+                    <td colspan="2" style="padding:10px 0 18px 0;">
+                        <input type="submit" value="提 交"  class="sub"/> <span><a href="#" class="for_pass">忘记密码</a></span>
+                    </td>
+                </tr>
+            </table>
+        </form>
+</div>
+</div>
+</body>
+</html>

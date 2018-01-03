@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link th:href="@{custom/css/common.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{custom/js/jquery-1.7.2.min.js}" charset="utf-8"></script>
+    <script th:src="@{custom/js/jquery.poptrox.min.js}" charset="utf-8"></script>
+
+    <script th:src="@{custom/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{custom/layer/layer.min.js}"></script>
+    <script type="text/javascript" th:src="@{custom/js/jquery.SuperSlide.2.1.1.js}"></script>
+</head>
+
+<body>
+<!--<div th:include="mainfragment ::top"></div>-->
+<div id="J_Wrap" class="wrap">
+
+
+    <div th:include="mainfragment ::nav"></div>
+    <div class="main-1">
+        <div class="banner index">
+            <div class="banner-btn">
+                <a href="javascript:void(0);" class="prevBtn large"><i></i></a>
+                <a href="javascript:void(0);" class="nextBtn large"><i></i></a>
+            </div>
+            <ul class="banner-img">
+                <li><a href="#"><img th:src="@{custom/upload/1.jpg}" width="788" height="373"></a></li>
+                <li><a href="#"><img th:src="@{custom/upload/2.jpg}" width="788" height="373"></a></li>
+                <li><a href="#"><img th:src="@{custom/upload/3.jpg}" width="788" height="373"></a></li>
+                <li><a href="#"><img th:src="@{custom/upload/4.jpg}" width="788" height="373"></a></li>
+                <li><a href="#"><img th:src="@{custom/upload/5.jpg}" width="788" height="373"></a></li>
+                <li><a href="#"><img th:src="@{custom/upload/6.jpg}" width="788" height="373"></a></li>
+            </ul>
+            <ul class="banner-circle"></ul>
+        </div>
+        <div th:include="mainfragment ::user"></div>
+    </div>
+
+   <div th:if="${not #lists.isEmpty(subjectlist)}">
+       <div class="main-2" th:each="subject:${subjectlist}">
+           <h1 class="submenu"><strong class="title" th:text="${subject.subjectname}"></strong>
+               <span th:if="${not #lists.isEmpty(subject.classTypeList)}">
+                <a href="javascript:void(0);" th:each="classType:${subject.classTypeList}"><span th:text="${classType.classname}" th:onclick="'javascript:test(\''+${classType.id}+'\')'"></span></a>
+
+            </span><a href="alllist" class="more">更多&gt;&gt;</a>
+           </h1>
+           <div class="list-box" id="list-box">
+               <ul class="box" th:if="${not #lists.isEmpty(subject.leftResource)}">
+                   <li th:each="leftResource:${subject.leftResource}">
+                       <a th:href="|resource?id=${leftResource.id}|" class="fresh_img"><img class="full" th:src="@{${leftResource.img}}"/></a>
+                       <div class="bg-box til">
+                           <a href="resource" class="names" th:text="${leftResource.name}"></a>
+                           <div class="info">
+                               <span class="introduces" th:text="${leftResource.description}"></span>
+                               <div class="pin-btn">
+                                   <a th:href="|video?id=${leftResource.id}|" class="show">点击预览</a>
+                                   <a th:href="|resource?id=${leftResource.id}|" class="look">查看详细</a>
+
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+
+               <ul class="hot-box" th:if="${not #lists.isEmpty(subject.centerResource)}">
+                   <li class="hot" th:each="centerResource:${subject.centerResource}">
+                       <a th:href="|resource?id=${centerResource.id}|" class="fresh_img"><img th:src="@{${centerResource.img}}" class="full"/></a>
+                       <div class="bg-box ti2">
+                           <a href="resource" class="names" th:text="${centerResource.name}"></a>
+                           <div class="info">
+                               <span class="introduces" th:text="${centerResource.description}"></span>
+                               <div class="pin-btn">
+                                   <a th:href="|video?id=${centerResource.id}|" class="show">点击预览</a>
+                                   <a th:href="|resource?id=${centerResource.id}|" class="look">查看详细</a>
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+               <ul class="box" th:if="${not #lists.isEmpty(subject.rightResource)}">
+                   <li th:each="rightResource:${subject.rightResource}">
+                       <a th:href="|resource?id=${rightResource.id}|" class="fresh_img"><img th:src="@{${rightResource.img}}" class="full"/></a>
+                       <div class="bg-box til">
+                           <a href="resource" class="names" th:text="${rightResource.name}"></a>
+                           <div class="info">
+                               <span class="introduces" th:text="${rightResource.description}"></span>
+                               <div class="pin-btn">
+                                   <a th:href="|video?id=${rightResource.id}|" class="show">点击预览</a>
+                                   <a th:href="|resource?id=${rightResource.id}|" class="look">查看详细</a>
+
+                               </div>
+                           </div>
+                       </div>
+                   </li>
+               </ul>
+
+           </div>
+       </div>
+
+   </div>
+
+    <div th:include="mainfragment :: copyright"></div>
+</div>
+<div th:include="mainfragment :: tools"></div>
+<script type="text/javascript">
+    function test(aaa) {
+        window.location.href = "alllist?classid="+aaa;
+    }
+    $(function () {
+        var $body = $(document.body);
+        var $bottomTools = $('.bottom_tools');
+        var $qrTools = $('.qr_tool');
+        var qrImg = $('.qr_img');
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();
+            var scrollTop = $(window).scrollTop();
+            var $footerHeight = $('.page-footer').outerHeight(true);
+            var $windowHeight = $(window).innerHeight();
+            $bottomTools.css("bottom", scrollHeight - scrollTop - $footerHeight > $windowHeight ? 80 : $windowHeight + scrollTop + $footerHeight + 80 - scrollHeight);
+        });
+        $('#scrollUp').click(function (e) {
+            e.preventDefault();
+            $('html,body').animate({scrollTop: 0});
+        });
+        $qrTools.hover(function () {
+            qrImg.show();
+        }, function () {
+            qrImg.hide();
+        });
+        var $mark = 'on';
+
+        $layer = function () {
+            $.layer({
+                type: 2,
+                title: '在线听音乐',
+                border: [0, 0.3, '#666'],
+                shade: [0],
+                maxmin: true,
+                shadeClose: true, //开启点击遮罩关闭层
+                area: ['745px', '549px'],
+                shift: 'right-bottom',
+                close: function (index) {
+                    $mark = 'on';
+                },
+                iframe: {src: 'http://web.kugou.com/', scrolling: 'no'}
+            });
+        }
+
+        $('#music_box').click(function () {
+            if ($mark == 'on') {
+                $layer();
+            }
+            $mark = 'off';
+        })
+    });
+</script>
+</body>
+</html>

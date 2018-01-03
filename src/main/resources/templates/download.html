@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>资源详情</title>
+    <link th:href="@{custom/css/common.css}" rel="stylesheet" type="text/css"/>
+    <link th:href="@{custom/css/slider.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{custom/js/jquery-1.7.2.min.js}" charset="utf-8"></script>
+    <script th:src="@{custom/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{custom/js/slider.js}" charset="utf-8"></script>
+    <script th:src="@{custom/layer/layer.min.js}"></script>
+    <script type="text/javascript" th:src="@{custom/js/jquery.SuperSlide.2.1.1.js}"></script>
+    <script th:src="@{custom/js/share.js}"></script>
+    <script th:src="@{custom/js/jquery.qrcode.min.js}"></script>
+
+</head>
+<body>
+<!--<div th:include="mainfragment ::top"></div>-->
+<div id="J_Wrap" class="wrap">
+    <div th:include="mainfragment ::nav"></div>
+
+    <!--详细页-->
+    <!--<div class="main-2">-->
+    <!--<div class="place">当前位置：<a href="index.html">首页</a> &gt; <a href="forum.html">网页元素</a> &gt; jQuery工具提示插件</div>-->
+    <!--</div>-->
+    <div class="main-2">
+        <div class="products-title-box">
+            <div class="tl_box">
+                <h1 th:text="${resource.name}"></h1>
+                <!--<span class="date">发布：2014-3-31 13:11:16　阅读：648次</span>-->
+            </div>
+            <!--<div class="mobile">-->
+            <!--<div class="qr_code_box">-->
+            <!--<div id="qrcodeTable"></div>-->
+            <!--<script>-->
+            <!--$(function(){-->
+            <!--$(".mobile").hover(function(){-->
+            <!--$(this).find(".qr_code_box").show();-->
+
+
+            <!--},function(){-->
+            <!--$(this).find(".qr_code_box").hide();-->
+
+            <!--})-->
+            <!--});-->
+            <!--//jQuery('#qrcode').qrcode("this plugin is great");-->
+            <!--jQuery('#qrcodeTable').qrcode({-->
+            <!--render: "table",-->
+            <!--width: 180, //宽度-->
+            <!--height:180, //高度-->
+            <!--text: "http://www.baidu.com"-->
+            <!--});-->
+            <!--</script>-->
+            <!--</div>-->
+            <!--</div>-->
+        </div>
+        <div class="infoImgX">
+            <img th:src="@{${resource.img}}" width="345" height="222"/>
+        </div>
+      </div>
+    <div class="main-2">
+        <div class="inbox-a">
+            <div class="hasMoreTab">
+                <div class="hd">
+
+                    <ul>
+                        <li>支付成功，资源链接如下：</li>
+
+                    </ul>
+                    <div class="er_co_box">
+
+                    </div>
+                </div>
+                <div class="bd">
+                    <div class="conWrap">
+                        <div class="list-box sideBar-a" id="list-box">
+                            <p style="text-align:left; line-height:2; margin-left:15px;font-size: 34px;
+    color: red;">
+                                <!--这里添加资源的详细信息-->
+                                <span th:text="${resource.url}"></span>
+
+                            </p>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <!--<script type="text/javascript">-->
+                <!--jQuery(".hasMoreTab").slide({ mainCell:".conWrap", targetCell:".more a"});	</script>-->
+            </div>
+            <div th:include="problem :: problem"></div>
+        </div>
+
+
+    </div>
+    <!---->
+    <div th:include="mainfragment :: copyright"></div>
+</div>
+
+</body>
+</html>

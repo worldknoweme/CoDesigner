@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <link th:href="@{custom/css/common.css}" rel="stylesheet" type="text/css"/>
+    <script th:src="@{custom/js/jquery-1.7.2.min.js}" charset="utf-8"></script>
+    <script th:src="@{custom/js/jquery.poptrox.min.js}" charset="utf-8"></script>
+
+    <script th:src="@{custom/js/common.js}" charset="utf-8"></script>
+    <script th:src="@{custom/layer/layer.min.js}"></script>
+    <script type="text/javascript" th:src="@{custom/js/jquery.SuperSlide.2.1.1.js}"></script>
+</head>
+
+<body>
+<!--<div th:include="mainfragment ::top"></div>-->
+<div id="J_Wrap" class="wrap">
+
+
+    <div th:include="mainfragment ::nav"></div>
+
+
+    <div class="main-2">
+        <div class="inbox-a">
+            <h1 class="main-title"><strong class="title" th:text="${title}"></strong><p class="ui-page-s">
+                <b class="ui-page-s-len">1/100</b>
+                <b class="ui-page-s-prev" title="上一页">&lt;</b>
+                <a href="#" class="ui-page-s-next"  title="下一页">&gt;</a>
+            </p></h1>
+            <div class="list-box sideBar-a" id="list-box" th:if="${not #lists.isEmpty(list)}">
+                <ul class="box spa" th:each="resource:${list}">
+                    <li>
+                        <a th:href="|resource?id=${resource.id}|" class="fresh_img"><img style="width: 100%" th:src="@{${resource.img}}" /></a>
+                        <div class="bg-box til">
+                            <a href="#" class="names" th:text="${resource.name}"></a>
+                            <div class="info">
+                                <span class="introduces" th:text="${resource.description}"></span>
+                                <div class="pin-btn">
+                                    <a th:href="|video?id=${resource.id}|" class="show">点击预览</a>
+                                    <a th:href="|resource?id=${resource.id}|" class="look">查看详细</a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+
+                </ul>
+
+                <div class="ui-page">
+                    <div class="ui-page-wrap">
+                        <b class="ui-page-num">
+                            <b class="ui-page-prev">&lt;&lt;上一页</b>
+                            <b class="ui-page-cur">1</b>
+                            <a href="#" atpanel="2,,,,,20,footer,">2</a>
+                            <a href="#" atpanel="2,,,,,20,footer,">3</a>
+                            <b class="ui-page-break">...</b>
+                            <a class="ui-page-next" href="#" >下一页&gt;&gt;</a>
+                        </b>
+                        <b class="ui-page-skip">
+                            <form name="filterPageForm" method="get">
+                                <input type="hidden" name="type" value="pc">
+                                <input type="hidden" name="search_condition" value="71">
+                                <input type="hidden" name="totalPage" value="100">
+                                <input type="hidden" name="cat" value="50100128">
+                                <input type="hidden" name="sort" value="s"><input type="hidden" name="style" value="g">   <input type="hidden" name="from" value="sn_1_cat"><input type="hidden" name="active" value="1">    共100页，到第<input type="text" name="jumpto" class="ui-page-skipTo" size="3" value="1">页
+                                <button type="submit" class="ui-btn-s" >确定</button>
+                            </form>
+                        </b>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+    <div th:include="mainfragment :: copyright"></div>
+</div>
+<div th:include="mainfragment :: tools"></div>
+<script type="text/javascript">
+    $(function () {
+        var $body = $(document.body);
+        var $bottomTools = $('.bottom_tools');
+        var $qrTools = $('.qr_tool');
+        var qrImg = $('.qr_img');
+        $(window).scroll(function () {
+            var scrollHeight = $(document).height();
+            var scrollTop = $(window).scrollTop();
+            var $footerHeight = $('.page-footer').outerHeight(true);
+            var $windowHeight = $(window).innerHeight();
+            $bottomTools.css("bottom", scrollHeight - scrollTop - $footerHeight > $windowHeight ? 80 : $windowHeight + scrollTop + $footerHeight + 80 - scrollHeight);
+        });
+        $('#scrollUp').click(function (e) {
+            e.preventDefault();
+            $('html,body').animate({scrollTop: 0});
+        });
+        $qrTools.hover(function () {
+            qrImg.show();
+        }, function () {
+            qrImg.hide();
+        });
+        var $mark = 'on';
+
+        $layer = function () {
+            $.layer({
+                type: 2,
+                title: '在线听音乐',
+                border: [0, 0.3, '#666'],
+                shade: [0],
+                maxmin: true,
+                shadeClose: true, //开启点击遮罩关闭层
+                area: ['745px', '549px'],
+                shift: 'right-bottom',
+                close: function (index) {
+                    $mark = 'on';
+                },
+                iframe: {src: 'http://web.kugou.com/', scrolling: 'no'}
+            });
+        }
+
+        $('#music_box').click(function () {
+            if ($mark == 'on') {
+                $layer();
+            }
+            $mark = 'off';
+        })
+    });
+</script>
+</body>
+</html>

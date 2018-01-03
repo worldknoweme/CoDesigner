@@ -1,0 +1,73 @@
+@charset "utf-8";
+html,body,dl,dd,img,form,div,ul,ol,li,h1,h2,h3,h4,h5,h6,h7{margin:0;padding:0;border:0;}
+ul,ol,li{ list-style-type:none;}
+a img{ border:none}
+iframe{border:none;}
+
+/* function */
+.fl{float:left;_display:inline;}
+.fr{float:right;_display:inline;}
+.h{display:none;visibility:visible;}
+.clear{clear:both;font-size:0;line-height:0;height:0;visibility:visible;}
+.clearfix{*zoom:1;}
+.clearfix:after{display:block;clear:both;content:".";visibility:hidden;height:0;}
+.right{text-align:right;}
+.left{text-align:left;}
+.b{font-weight:bold;}
+.line-through{text-decoration:line-through;}
+.under{text-decoration:underline;}
+.break{word-break:break-all;}
+.red{color:#af0102;}
+.sub,.res{
+	font-family:"微软雅黑";
+	font-size: 14px;
+	line-height: 30px;
+	color: #FFF;
+	cursor:pointer;
+	background-color: #279D27;
+	text-align: center;
+	height: 30px;
+	width: 90px;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+}
+.res{
+	margin-left:10px;
+}
+.gray{color:#CCC;}
+a.gray{color:#CCC;}
+a.gray:visited{color:#CCC;}
+.f14{font-size:14px;}
+.editor{line-height:24px;text-align:left;}
+.editor p{text-indent:2em;}
+.editor ol li{list-style-type:circle; margin-left:25px;}
+.editor ul li{list-style-type:square;margin-left:25px;}
+
+body{font-family:"微软雅黑";font-size:12px;}
+.container {
+	width: 100%;
+	color: #444;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 30px;
+	margin-left: auto;
+}
+a:link {text-decoration:none;}
+a:visited {text-decoration:none;}
+a:active {text-decoration:none;}
+
+.head{width:1100px;margin:0 auto;height:100px;}
+.logo{margin:0px; padding:0px; }
+
+.menu{font-family:"微软雅黑";font-size:16px;line-height:100px;}
+.menu ul li{float:left;width:105px;text-align:center;}
+.menu ul li a{
+	display: block;
+	color: #333;
+}
+.menu ul li a:hover,.menu ul li a.a1{background:url(../images/menu_hover_bg.gif) no-repeat;color:#FFF;}
+
+.bottom{width:100%;margin:0 auto;background:url(../images/bottom_bg.gif) repeat-x;height:65px;line-height:65px; clear:both;}
+.bottom_con{width:1100px;margin:0 auto;text-align:center;color:#FFF;}
